@@ -38,7 +38,7 @@ var fs=require("fs")
         catch (err){
             console.log("no se puede leer archivo")
         }
-        try{
+/*         try{
             productos.splice(0,1)
             setTimeout(()=>{
                 fs.promises.writeFile('./productos.txt',JSON.stringify(productos))
@@ -57,10 +57,8 @@ var fs=require("fs")
         }
         catch (err){
             console.log(err)
-        }
+        } */
     }
-    
-   
  }
 
     productos.push (new Contenedor ("plato",1305,"https://www.shopmania.es/q-jarrones"))
