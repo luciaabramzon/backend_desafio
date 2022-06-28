@@ -1,18 +1,1 @@
-[{
-    "tittle":"plato",
-    "price":1305,
-    "image":"https://www.shopmania.es/q-jarrones",
-    "id":0
-},
-{
-    "tittle":"mesa",
-    "price":1650,
-    "image":"https://www.shopmania.es/q-jarrones",
-    "id":1
-},
-{
-    "tittle":"jarron",
-    "price":105,
-    "image":"https://www.shopmania.es/q-jarrones",
-    "id":2
-}]
+[{"tittle":"plato","price":1305,"image":"https://www.shopmania.es/q-jarrones","id":0},{"tittle":"mesa","price":1650,"image":"https://www.shopmania.es/q-jarrones","id":1},{"tittle":"jarron","price":105,"image":"https://www.shopmania.es/q-jarrones","id":2}]
