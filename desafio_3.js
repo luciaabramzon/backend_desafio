@@ -17,7 +17,7 @@ class Contenedor {
     async save(obj) {
         try {
             let inventary = await fs.promises.readFile(`${this.fileName}`, 'utf-8')
-            console.log(inventary)
+            /* console.log(inventary) */
             if (!inventary) {
                 obj.id = 1
                 const arrObjs = [obj]
@@ -58,7 +58,7 @@ class Contenedor {
             let inventaryParse = JSON.parse(inventary)
             return inventaryParse
         } catch (err) {
-            console.log(`hubo un error : ${err}`)
+            console.log(`hubo un error 1: ${err}`)
         }
     }
 
@@ -93,4 +93,46 @@ async function cargarProductos (){
     await newFile.save({ title: "lapiz", price: 300, thumbnail: "https://papeleria24h.files.wordpress.com/2019/03/punta-lapiz-staedtler-tradition-110.jpg?w=982" })
     await newFile.save({ title: "carpeta", price: 500, thumbnail: "https://www.rioshopdeco.com.ar/6534-large_default/carpeta-pp-tonalizada-escolar-3x40-azul-art-5401.jpg" })
 }
- cargarProductos()  
+ cargarProductos()   
+
+ let readFile = async function (){
+    let inventario= JSON.stringify(await newFile.getAll())
+    return inventario
+ }
+ readFile()
+
+
+ let getById = async function (){
+  for (let i=1; i<3; i++){
+        let number= Math.floor(Math.random()*3)
+       let getbyId = await newFile.getbyId(number)
+        console.log(getbyId)
+        return getbyId 
+    }  
+}
+ getById() 
+
+ const express=require ('express')
+const app=express()
+const port=8080
+
+app.get(`/`,async (req,res)=>{
+    res.end(`<h1> Desafio 3 </h1>`)
+})
+
+app.get(`/productos`,async (req,res)=>{
+    let inventario= await readFile()
+    res.end((inventario))
+})
+
+  app.get(`/productosRandom`,async (req,res)=>{
+    let aleatorio= await getById()
+    
+    res.end(JSON.stringify(aleatorio))
+})  
+ 
+app.on("error",error=>console.log(`El error es ${error}`))
+
+app.listen(port,()=>{
+    console.log(`Tu servidor esta corriendo en ${port}`)
+})     
