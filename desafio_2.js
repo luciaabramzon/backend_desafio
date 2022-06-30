@@ -87,12 +87,10 @@ const port=8081
 let inventario = async function(){
     let inventario= await producto1.readFile()
     let contenidoArray=JSON.parse(inventario)
-    for(let i=0; i<contenidoArray.length; i++){
-        let number= contenidoArray[Math.floor(Math.random()*contenidoArray.length)]
-        let getById = await producto1.getbyId(number.id)
-        return getById
-    }
- }
+    let number= contenidoArray[Math.floor(Math.random()*contenidoArray.length)]
+    let getById = await producto1.getbyId(number.id)
+    return getById
+  }
 inventario()
  
  app.get(`/`,async (req,res)=>{
