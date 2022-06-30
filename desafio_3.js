@@ -103,19 +103,22 @@ async function cargarProductos (){
 
 
  let getById = async function (){
-  for (let i=1; i<3; i++){
+    let inventario= await JSON.parse(newFile.getAll())
+    console.log(inventario)
+    return inventario
+/*   for (let i=1; i< inventario.lenght; i++){
         let number= Math.floor(Math.random()*3)
        let getbyId = await newFile.getbyId(number)
         console.log(getbyId)
         return getbyId 
-    }  
+    }   */
 }
  getById() 
 
  const express=require ('express')
 const app=express()
 const port=8080
-
+/* 
 app.get(`/`,async (req,res)=>{
     res.end(`<h1> Desafio 3 </h1>`)
 })
@@ -135,4 +138,4 @@ app.on("error",error=>console.log(`El error es ${error}`))
 
 app.listen(port,()=>{
     console.log(`Tu servidor esta corriendo en ${port}`)
-})     
+})      */

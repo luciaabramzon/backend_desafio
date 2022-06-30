@@ -31,19 +31,21 @@ var fs=require("fs")
             console.log("no se puede leer archivo")
         }
     }
-    async getById(){
-        try{
-            let elegido=await productos.find(id=>id.id===2)
-            if(!elegido){
-            console.log('no hay producots')
-            }else{
-            console.log(elegido)
+   async getbyId(id) {
+        try {
+            const inventary = await fs.promises.readFile(`./productos.txt`, "utf-8")
+            let dataParse = JSON.parse(inventary)
+            let objFind = dataParse.find(item => item.id == id)
+            if (objFind) {
+                return objFind
+            } else {
+                return null
             }
+
+        } catch (err) {
+            console.log(`hubo un error en recuperar el objeto por id : ${err}`)
         }
-        catch (err){
-            console.log("error")
-        }
-    }
+    } 
     async deleteById(){
         try{
             productos.splice(0,1)
@@ -70,24 +72,27 @@ var fs=require("fs")
     }
     }
 
-    export default Contenedor
 
     productos.push (new Contenedor ("plato",1305,"https://www.shopmania.es/q-jarrones"))
     productos.push (new Contenedor ("mesa",1650,"https://www.shopmania.es/q-jarrones"))
     
     const producto1= new Contenedor ("jarron",105,"https://www.shopmania.es/q-jarrones")
-    productos.push(producto1)
-  /*   producto1.save()   */
+   productos.push(producto1) 
+/*    producto1.save()    */
 const express=require ('express')
+const { get } = require("https")
 const app=express()
-const port=8080
+const port=8081
 
 let inventario = async function(){
     let inventario= await producto1.readFile()
     let contenidoArray=JSON.parse(inventario)
-    let aleatorio= contenidoArray[Math.floor(Math.random()*contenidoArray.length)]
-    return aleatorio
-}
+    for(let i=0; i<contenidoArray.length; i++){
+        let number= contenidoArray[Math.floor(Math.random()*contenidoArray.length)]
+        let getById = await producto1.getbyId(number.id)
+        return getById
+    }
+ }
 inventario()
  
  app.get(`/`,async (req,res)=>{
