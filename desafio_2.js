@@ -82,7 +82,7 @@ var fs=require("fs")
 const express=require ('express')
 const { get } = require("https")
 const app=express()
-const port=8081
+const port=process.env.PORT || 8000
 
 let inventario = async function(){
     let inventario= await producto1.readFile()
